@@ -16,7 +16,6 @@
 export default {
   props: ['formTitle'],
   computed: {
-    //     // TODO 入力値のバリデーションを入れたい
     consultationDetail: {
       get() {
         return this.$store.state.consultationDetail;

@@ -50,7 +50,6 @@ export default {
     }
   },
   computed: {
-    // TODO 入力値のバリデーションを入れたい
     memberOfLifeInsurance: {
       get() {
         return this.$store.state.memberOfLifeInsurance;
@@ -82,6 +81,26 @@ export default {
   },
   components: {
     BaseForm
+  },
+  beforeRouteLeave(to, from, next) {
+    if (this.$store.state.memberOfLifeInsurance == null) {
+      alert('生命保険へ加入済みかにチェックを入れてください。');
+      next(false);
+      return;
+    }
+
+    if (this.$store.state.dangerCondition == null) {
+      alert('現在入院中かにチェックを入れてください。');
+      next(false);
+      return;
+    }
+    if (this.$store.state.surgeryExperience == null) {
+      alert('入院経験にチェックを入れてください。');
+      next(false);
+      return;
+    }
+
+    next();
   }
 }
 </script>

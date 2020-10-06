@@ -48,7 +48,6 @@ export default {
     }
   },
   computed: {
-    //     // TODO 入力値のバリデーションを入れたい
     gender: {
       get() {
         return this.$store.state.gender;
@@ -91,6 +90,21 @@ export default {
   },
   components: {
     BaseForm
+  },
+  beforeRouteLeave(to, from, next) {
+    if (this.$store.state.gender == null) {
+      alert('性別にチェックを入れてください。');
+      next(false);
+      return;
+    }
+
+    if (this.$store.state.birthYear == null || this.$store.state.birthMonth == null || this.$store.state.birthDay == null) {
+      alert('生年月日にチェックを入れてください。');
+      next(false);
+      return;
+    }
+
+    next();
   }
 }
 </script>

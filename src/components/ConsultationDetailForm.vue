@@ -2,7 +2,6 @@
   <base-form form-title="ご相談内容をご記入ください">
     <template v-slot:main>
       <p>-ご相談内容-</p>
-      <!--    TODO 改行を受け付けられるようにしたい    -->
       <textarea v-model="consultationDetail"></textarea>
     </template>
     <template v-slot:footer-buttons>
@@ -17,7 +16,6 @@ import BaseForm from "@/components/BaseForm";
 
 export default {
   computed: {
-    //     // TODO 入力値のバリデーションを入れたい
     consultationDetail: {
       get() {
         return this.$store.state.consultationDetail;
@@ -30,6 +28,15 @@ export default {
   },
   components: {
     BaseForm
+  },
+  beforeRouteLeave(to, from, next) {
+    if (this.$store.state.consultationDetail == null || this.$store.state.consultationDetail.length == 0) {
+      alert('相談事項を入力してください。');
+      next(false);
+      return;
+    }
+
+    next();
   }
 }
 </script>
