@@ -8,8 +8,8 @@
       <hr>
       <p>-生年月日-</p>
       <select v-model="birthYear">
-        <option v-for="n in 120" :key="n">
-          {{ n + 1900 }}
+        <option v-for="n in 120" :key="n" :value="n+1900">
+          {{ year(n) }}
         </option>
       </select>年
       <select v-model="birthMonth">
@@ -83,9 +83,15 @@ export default {
     }
   },
   methods: {
-    check() {
-      console.log(this.$store.getters.gender);
-      console.log(this.$store.getters.birthday);
+    year(index) {
+      const year = 1900 + index;
+
+      if (1900 <= year && year < 1912) return `${year}年(明治${year - 1867})`
+      if (1912 <= year && year < 1926) return `${year}年(大正${year - 1911})`
+      if (1926 <= year && year < 1989) return `${year}年(昭和${year - 1925})`
+      if (1989 <= year && year < 2018) return `${year}年(平成${year - 1988})`
+
+      return `${year}年(令和${year - 2018})`
     }
   },
   components: {
