@@ -4,24 +4,25 @@
       <p>-ご相談内容-</p>
       <p>現在、生命保険に加入されていますか？</p>
       <template v-for="item in yesOrNo">
-        <input :key="'memberOfLifeInsurance-'+item.value" type="radio" name="memberOfLifeInsurance" :value=item.value v-model="memberOfLifeInsurance">{{ item.label }}
+        <input :key="'memberOfLifeInsurance-'+item.value" type="radio" name="memberOfLifeInsurance" :value=item.value
+               v-model="memberOfLifeInsurance">{{ item.label }}
       </template>
-      {{ memberOfLifeInsurance }}
-<!--      <template v-if=memberOfLifeInsurance>-->
+      <template v-if="isSetMemberOfLifeInsurance">
         <hr>
         <p>現在、入院中ですか。または、最近3ヶ月以内に医師の診察・検査の結果、入院・手術をすすめられたことはありますか？</p>
         <template v-for="item in yesOrNo">
-          <input :key="'dangerCondition-'+item.value" type="radio" name="dangerCondition" :value=item.value v-model="dangerCondition">{{ item.label }}
+          <input :key="'dangerCondition-'+item.value" type="radio" name="dangerCondition" :value=item.value
+                 v-model="dangerCondition">{{ item.label }}
         </template>
-      {{ dangerCondition }}
-<!--      </template>-->
-<!--      <template v-if="dangerCondition">-->
+      </template>
+      <template v-if="isSetDangerCondition">
         <hr>
         <p>過去5年以内に、病気やけがで、手術をうけたことまたは継続して7日以上の入院をしたことがありますか？</p>
         <template v-for="item in yesOrNo">
-          <input :key="'surgeryExperience-'+item.value" type="radio" name="surgeryExperience" :value=item.value v-model="surgeryExperience">{{ item.label }}
+          <input :key="'surgeryExperience-'+item.value" type="radio" name="surgeryExperience" :value=item.value
+                 v-model="surgeryExperience">{{ item.label }}
         </template>
-<!--      </template>-->
+      </template>
     </template>
     <template v-slot:footer-buttons>
       <router-link tag="button" class="button is-primary" :to="{ name: 'basicInfoForm' }">前へ戻る</router-link>
@@ -31,8 +32,8 @@
 </template>
 
 <script>
-// import SingleSelectionButton from "@/components/SingleSelectionButton";
 import BaseForm from "@/components/BaseForm";
+import {mapGetters} from "vuex";
 
 export default {
   data() {
@@ -57,7 +58,6 @@ export default {
       ,
       set(value) {
         this.$store.state.memberOfLifeInsurance = value;
-        // this.$store.commit('updateMemberOfLifeInsurance', {memberOfLifeInsurance: value});
       }
     },
     dangerCondition: {
@@ -77,7 +77,8 @@ export default {
       set(value) {
         this.$store.state.surgeryExperience = value;
       }
-    }
+    },
+    ...mapGetters(['isSetMemberOfLifeInsurance', 'isSetDangerCondition'])
   },
   components: {
     BaseForm
