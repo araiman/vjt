@@ -13,16 +13,5 @@ export const store = new Vuex.Store({
         dangerCondition: null,
         surgeryExperience: null,
         consultationDetail: null
-    },
-    getters: {
-        birthday: state => {
-            return state.birthYear + '年' + state.birthMonth + '月' + state.birthDay + '日';
-        },
-        isSetMemberOfLifeInsurance: state => {
-            return state.memberOfLifeInsurance != null;
-        },
-        isSetDangerCondition: state => {
-            return state.dangerCondition != null;
-        }
     }
 })

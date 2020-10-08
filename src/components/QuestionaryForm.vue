@@ -33,7 +33,6 @@
 
 <script>
 import BaseForm from "@/components/BaseForm";
-import {mapGetters} from "vuex";
 
 export default {
   data() {
@@ -78,7 +77,12 @@ export default {
         this.$store.state.surgeryExperience = value;
       }
     },
-    ...mapGetters(['isSetMemberOfLifeInsurance', 'isSetDangerCondition'])
+    isSetMemberOfLifeInsurance() {
+      return this.$store.state.memberOfLifeInsurance !== null;
+    },
+    isSetDangerCondition() {
+      return this.$store.state.dangerCondition !== null;
+    }
   },
   components: {
     BaseForm
