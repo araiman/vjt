@@ -6,7 +6,7 @@
     </template>
     <template v-slot:footer-buttons>
       <router-link tag="button" class="button is-primary" :to="{ name: 'questionaryForm' }">前へ戻る</router-link>
-      <router-link tag="button" class="button is-primary" :to="{ name: '' }">次へ進む</router-link>
+      <router-link tag="button" class="button is-primary" :to="{ name: 'resultView' }">次へ進む</router-link>
     </template>
   </base-form>
 </template>
